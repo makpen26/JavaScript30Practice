@@ -38,28 +38,109 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let resultBornAfter1500s = inventors.filter(peopleBornAfter => peopleBornAfter.year >= 1500 && peopleBornAfter.year < 1600);
+
+
+
+
+
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let fullnameOfInventors = inventors.map((fullname) => `${fullname.first} ${fullname.last}`);
+
+
+
+
+
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    let holdArrayBeforeSort = inventors.sort((a, b) => a.year > b.year ? 1 : -1); 
+
+
+
+
+
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    let groupSumOfYearDied = inventors.reduce((sum, current) => {
+      return sum + (current.passed - current.year)
+    }, 0);
+
+
+
+
 
     // 5. Sort the inventors by years lived
+    //console.table(inventors.sort((a, b) => (a.passed - a.year) > (b.passed - b.year) ? 1 : -1));
+
+
+
+
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    let splitByLastname = people.map(item => item);
+    let splitByLastnames = splitByLastname.map(item => item.split(', '));
+    let splitNameArray = []
+    for (let i = 0; i < splitByLastnames.length; i++) {
+      splitNameArray.push(splitByLastnames[i][0]);//before I had as "splitByLastnames[i][1]" extracting the second part comes after the comma
+                                                  //the video has as "splitByLastnames[i][0]" extracting the first part comes before the comma
+                                                  //the format is lastname, firstname ?
+    }
+    //console.table(splitNameArray.sort());
+    
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van',
+     'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
+    function unique(arr) {
+      let newArray = [];
+      for (let str of arr) {
+        if (! newArray.includes(str)) {
+          newArray.push(str);
+        }
+      }
+      return newArray;
+    }
+    let holdArray = unique(data);
+    let countArray = [];
+    let countt = 0;
+    let cArr = data.sort();
+    for (let i = 0; i < holdArray.length; i++) {
+      for (let j = 0; j < data.length; j++) {
+        if (holdArray[i] == cArr[j]) {
+          countt++;
+          countArray[i] = countt;
+        } else {
+          countt = 0;
+        }
+      }
+    }
+    console.table(holdArray);
+    console.table(cArr);
+    
+    for (let i = 0; i < countArray.length; i++) {
+      console.log(`${holdArray[i]} = ${countArray[i]} copies`);
+    }
+  
+    
+    /*let foundCopies = []
+    for (let i = 0; i < holdArray.length; i++) {
+      for (let j = 0; j < data.length; j++) {
+        if (holdArray[i] == data[j]) {
+          foundCopies.push(holdArray[i]);
+        } else {
+          continue;
+        }
+      }
+    }*/
 
   </script>
 </body>
